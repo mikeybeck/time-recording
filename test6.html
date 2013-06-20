@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<script type="text/javascript">
+var c=parseInt(localStorage.c);
+var a;
+var t;
+var timer_is_on=0;
+
+/*
+function timedCount(activity)
+//function timedCount()
+{
+document.getElementById('txt').value=c;
+t=setTimeout("timedCount()",1000);
+localStorage.a = activity;
+localStorage.c = c;
+localStorage.setItem(activity, c);
+c=c+1;
+}
+ 
+function doTimer()
+{
+var activity = document.getElementById('activity').value;
+localStorage.cx = activity;
+if (!timer_is_on)
+  {
+  timer_is_on=1;
+  timedCount(activity);
+//timedCount();
+  }
+}
+ 
+function stopCount()
+{
+clearTimeout(t);
+timer_is_on=0;
+}
+
+function getCount()
+{
+var activity = document.getElementById('activity').value;
+alert(activity + " " + localStorage.getItem(activity))
+
+document.getElementById("c").innerHTML="time: " + localStorage.c;
+document.getElementById("a").innerHTML="activity: " + localStorage.a;
+}
+function resetCount()
+{
+c = 0;
+localStorage.c = 0;
+
+localStorage.clear();
+	alert("cleared!");
+}
+*/
+
+
+
+var started = true;
+
+// Add leading-zeros to numbers less than 10[000...]
+function padZ(num, n) {
+    n = n || 1; // Default assume 10^1
+    return num < Math.pow(10, n) ? "0" + num : num;
+}
+
+function getDate() {
+	var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1; // Note the `+ 1` -- months start at zero.
+    var year = d.getFullYear();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    var sec = d.getSeconds();
+    return month+"/"+day+"/"+year+" "+hour+":"+padZ(min)+":"+padZ(sec);
+}
+
+function clearAll() {
+	localStorage.clear();
+	localStorage.notfirsttime = "false";
+	started = false;
+	startstop();
+	alert("cleared!");
+}
+
+function stop() {
+	clearTimeout(t);
+	if (timer_is_on) {
+		timer_is_on=0;
+		//date = new Date();
+		date = getDate();
+		activity = getActivity(1);
+		localStorage.setItem(activity, localStorage.getItem(activity) + " Stopped: " + date);
+	}
+}
+
+function counter() {
+	//if (!c in window) {
+	if (isNaN(c)) {
+		c = 0;
+	}
+	document.getElementById('count').value=c;
+	t=setTimeout("counter()",1000);
+	//localStorage.setItem(getActivityName(), c);
+	c=c+1;
+}
+
+function timer() {
+if (!timer_is_on) {
+	timer_is_on=1;
+	counter();
+  }
+}
+
+function getActivityName() {
+	return document.getElementById('activity').value;
+}
+
+function getID(x) {
+	var i=parseInt(localStorage.i);
+	if (isNaN(i)) {
+		i = 0;
+	}
+	if (x != 1) {
+		i+=1;
+	}
+	localStorage.i = i;
+	return i;
+}
+
+function getActivity(x) {
+	return "<h1>"+getID(x) + ":" + getActivityName()+"</h1>"; //this appends a number to the activity name and therefore prevents overwriting
+}
+
+function start() {
+	var activity;
+	activity = getActivity(0);
+	//date = new Date();
+	date = getDate();
+	localStorage.setItem(activity, "Started: " + date);
+	timer();
+}
+
+function display() {
+	for (var i = 0; i < localStorage.length-3; i++){ //length-3 in order to not display the extra stuff (i & j values etc)
+		if (document.getElementById(i) == null) {
+			if (i == 0) {
+				localStorage.j = -1;
+			}
+			creatediv();
+		}
+		document.getElementById(i).innerHTML=(localStorage.key(i) + localStorage.getItem(localStorage.key(i)));
+	}
+}
+
+
+function replaceButtonText(buttonId, text)
+{
+  if (document.getElementById)
+  {
+    var button=document.getElementById(buttonId);
+    if (button)
+    {
+      if (button.childNodes[0])
+      {
+        button.childNodes[0].nodeValue=text;
+      }
+      else if (button.value)
+      {
+        button.value=text;
+      }
+      else //if (button.innerHTML)
+      {
+        button.innerHTML=text;
+      }
+    }
+  }
+}
+
+function startstop() {
+	var text_box = document.getElementById('activity');
+	if( started ){
+        text_box.setAttribute('readonly', 'readonly');   
+  		replaceButtonText('startstopbutton', 'stop');
+		started = false;
+		start();
+		creatediv();
+		display();
+  }else{
+	text_box.removeAttribute('readonly');
+	replaceButtonText('startstopbutton', 'start');
+	started = true;
+	stop();
+	display();
+  }
+}
+
+function creatediv() {
+	var j=parseInt(localStorage.j);
+	var notfirsttime = localStorage.notfirsttime;
+	if (notfirsttime != "true") {
+		j = -1;
+		localStorage.notfirsttime = "true";
+	}
+	
+	if (isNaN(j)) {
+		j = -1;
+	}
+	j+=1;
+	localStorage.j = j;
+	
+	
+    var newdiv = document.createElement('div');
+	newdiv.id = j;
+    document.body.appendChild(newdiv);
+}
+
+window.onload = function () {
+// Whatever you put in here will be executed on page load..
+	display();
+};
+
+</script>
+</head>
+<body>
+<form>
+
+<input type="button" value="Start!" onclick="startstop()" id="startstopbutton" />
+
+<input type="button" value="Display!" onclick="display()" />
+<input type="text" id="count" />
+<input type="button" value="reset!" onclick="clearAll()" />
+
+<input type="text" id="activity" />
+
+<input type="button" value="creatediv!" onclick="creatediv()" />
+</form>
+
+
+</body>
+</html>

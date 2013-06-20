@@ -1,0 +1,2417 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link href="/css/ecomm/shoppingcart/cssSnippet.jsp?styleThemeId=0&cssToLoad=appearance" rel="stylesheet" type="text/css" />
+        <link href="/css/ecomm/shoppingcart/cssSnippet.jsp?styleThemeId=0&cssToLoad=layout" rel="stylesheet" type="text/css" />
+
+        
+
+
+
+
+<script type="text/javascript" src="/js/sink_jq.jsp?b=1.28.6.37"></script>
+<script type="text/javascript" src="/js/sink_js.jsp?b=1.28.6.37"></script>
+
+        <script src="/resources/external/qtip/jquery-qtip-1.0.0-rc3.js?b=1.28.6.37" type="text/javascript"></script>
+        <script src="/resources/ecomm/orderforms/js/orderForms.js?b=1.28.6.37" type="text/javascript"></script>
+        <script src="/js/ecomm/shopping/managecart/manageCart.js?b=1.28.6.37" type="text/javascript"></script>
+
+        <script type="text/javascript">jQuery(window).load(function() {
+                
+            Infusion.ManageCart.init({"shopping.cart.empty.cart.error": "Your cart is empty, you cannot place an order.",
+                        "shopping.cart.shipping.required.error": "You must select a shipping option.",
+                        "shopping.cart.paymentType.required.error": "You must select a payment type.",
+                        "shopping.cart.validation.creditCard.number.required.error": "Credit card number is required.",
+                        "shopping.cart.validation.creditCard.number.format.error": "Credit card number should be numbers only, with no space or hyphen in between.",
+                        "shopping.cart.validation.creditCard.cvc.required.error": "Security Code is required.",
+                        "shopping.cart.validation.creditCard.cvc.format.error": "Security Code should be a three- or four-digit number."});
+        ;
+            });</script>
+    </head>
+    <body>
+
+        
+
+            
+            
+
+            <div id="wrapper">
+                
+                <form action="/app/manageCart/updateCart" method="post" name="checkout" id="checkout">
+
+                    <input id="proceedToCheckout" name="proceedToCheckout" type="hidden" value="false" />
+                    <input id="purchasableProductIds" name="purchasableProductIds" type="hidden" value="" />
+                    <input id="quantities" name="quantities" type="hidden" value="" />
+                    <input id="removePurchasableProductId" name="removePurchasableProductId" type="hidden" value="" />
+                    <input id="upSellId" name="upSellId" type="hidden" value="" />
+
+                    
+
+                    
+                    
+                        <div id="header">
+                            
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <div id="CUSTOM_HTML">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="customHeader">
+    
+</div>
+    </div>
+
+    
+
+    <div id="IMAGE">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+                        </div>
+                    
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                    
+
+                    
+                    
+                        <div id="contentWide">
+                            <div class="checkoutLinksTop">
+                                
+                                    <a href="/app/storeFront/showStoreFront" class="continueButton">Continue Shopping</a>
+                                
+                                
+                                    <a href="javascript:void(0)" id="checkoutButtonDup" class="continueButton">Checkout</a>
+                                
+                            </div>
+                            
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <div id="CUSTOM_HTML">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="customCheckoutTop">
+    
+</div>
+    </div>
+
+    
+
+    <div id="PAYMENT_PLANS">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+
+    <div id="BRIEF_PRODUCT_SUMMARY">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h1>Shopping Cart</h1>
+
+
+<input id="isShippingRequired" name="isShippingRequired" type="hidden" value="false" />
+<input id="isCartEmpty" name="isCartEmpty" type="hidden" value="false" />
+
+<div class="tableContainer">
+    <table class="viewCart">
+        <tr>
+            <th class="leftAlign" colspan="2">Name</th>
+            <th class="rightAlign">Price</th>
+            <th class="centerAlign">Qty</th>
+            <th class="rightAlign">Total</th>
+        </tr>
+        
+            
+                
+                    <tr>
+                        
+                            
+                            
+                            
+                                <td class="leftAlign" colspan="2">
+                            
+                        
+
+                            <p class="cartProduct">The Beast</p>
+                            <p class="cartDescription"> </p>
+                            
+                                <span class="subscriptionPlan">
+                                        USD18.88 / month
+                                </span>
+                                </br>
+                            
+                            
+                                <a href="javascript:Infusion.ManageCart.ajaxSubmitForm('checkout', false, '1', 0, ['BRIEF_PRODUCT_SUMMARY','UP_SELLS','PAYMENT_PLANS','SHIPPING_OPTIONS', 'SHIPPING_ENTRY', 'BILLING_ENTRY','PAYMENT_SELECTION']);">Remove</a>
+                            
+                        </td>
+                        <td class="rightAlign">
+                            
+                                
+                                
+                                    <span class="price">USD18.88</span>
+                                
+                            
+                        </td>
+                        <td class="centerAlign">
+                            
+                                
+                                    <input type="text" class="qtyField" name="qty_1" value="1" size="1">
+                                    <a href="javascript:Infusion.ManageCart.ajaxSubmitForm('checkout', false, 0, 0, ['BRIEF_PRODUCT_SUMMARY','UP_SELLS','PAYMENT_PLANS', 'SHIPPING_OPTIONS', 'SHIPPING_ENTRY', 'BILLING_ENTRY','PAYMENT_SELECTION']);" class="updateCart">Update</a>
+                                
+                                
+                            
+                        </td>
+                        <td class="rightAlign">
+                            USD18.88
+                        </td>
+                    </tr>
+                
+                
+            
+        
+
+        
+
+        
+
+        
+
+        <tr class="subtotal">
+            <td class="leftAlign" colspan="2">Sub Total:</td>
+            <td class="rightAlign"></td>
+            <td class="centerAlign"></td>
+            <td class="rightAlign">USD18.88</td>
+        </tr>
+    </table>
+</div>
+
+    </div>
+
+    
+
+    <div id="PROMO_CODE">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="promoCode">
+        <tr>
+            <td align="left">
+                
+                    Enter a Promo Code:
+                
+            </td>
+            <td>
+                <input class="promoField" id="promoCode" name="promoCode" type="text" />
+                <a href="javascript:Infusion.ManageCart.ajaxSubmitForm('checkout', false, 0, 0, ['BRIEF_PRODUCT_SUMMARY','PAYMENT_PLANS', 'PROMO_CODE', 'UP_SELLS']);" class="codeButton">Apply</a>
+            </td>
+        </tr>
+    </table>
+
+    </div>
+
+    
+
+    <div id="UP_SELLS">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+
+    <div id="BILLING_ENTRY">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="billingTable">
+
+    
+        <tr>
+            <th colspan="2" align="left">Billing Information</th>
+        </tr>
+    
+    
+    <tr>
+        <td class="rightAlignTop"><label class="checkoutLabel">* First Name</label></td>
+        <td>
+            
+                
+                    <input class="regula-validation checkoutTop" data-constraints="@Required(label=&quot;First Name&quot;, groups=[customer])" id="firstName" name="firstName" size="10" type="text" />
+                
+                
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel">* Last Name</label></td>
+        <td>
+            
+                
+                    <input class="regula-validation checkout" data-constraints="@Required(label=&quot;Last Name&quot;, groups=[customer])" id="lastName" name="lastName" size="12" type="text" />
+                
+                
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="rightAlign">
+            <label class="checkoutLabel">
+                
+                    
+                    
+                        Company Name
+                    
+                
+            </label>
+        </td>
+        <td>
+            
+                
+                    
+                        
+                        
+                            <input class="checkout" id="company" name="company" size="25" type="text" />
+                        
+                    
+                
+                
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel">* Address - Line 1</label></td>
+        <td><input class="regula-validation checkout" data-constraints="@Required(label=&quot;Address - Line 1&quot;, groups=[customer])" id="addressLine1" name="addressLine1" size="25" type="text" /></td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel">Address - Line 2</label></td>
+        <td><input class="checkout" id="addressLine2" name="addressLine2" size="25" type="text" /></td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel">* City</label></td>
+        <td><input class="regula-validation checkout" data-constraints="@Required(label=&quot;City&quot;, groups=[customer])" id="city" name="city" size="15" type="text" /></td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel"><div id="stateRequired">State</div></label></td>
+        <td>
+            
+                
+                    <input class="regula-validation checkout" data-constraints="@StateRequiredForSpecificCountries(countryFieldName=&quot;country&quot;, label=&quot;State&quot;, groups=[customer])" id="state" name="state" size="2" type="text" />
+                
+                
+            
+        </td>
+    </tr>
+    <tr>
+        <td class="rightAlign"><label class="checkoutLabel">* Zip Code</label></td>
+        <td><input class="regula-validation checkoutShort" data-constraints="@Required(label=&quot;Zip Code&quot;, groups=[customer])" id="zipCode" name="zipCode" size="5" type="text" /></td>
+    </tr>
+    
+        
+            <tr>
+                <td class="rightAlign"><label class="checkoutLabel">* Country</label></td>
+                <td><select class="regula-validation checkoutShort" data-constraints="@Required(label=&quot;Billing Country&quot;, groups=[customer])" class="inf-select is-component" id="country" name="country" data-on="Component.Select"><option value="">Please select one</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="&Aring;land Islands">Åland Islands</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="Brunei Darussalam">Brunei Darussalam</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo">Congo</option><option value="Democratic Republic Of Congo">Democratic Republic Of Congo</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="C&ocirc;te D'Ivoire">Côte D'Ivoire</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands">Falkland Islands</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard and McDonald Islands">Heard and McDonald Islands</option><option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jersey">Jersey</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="North Korea">North Korea</option><option value="South Korea">South Korea</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macao">Macao</option><option value="Republic of Macedonia">Republic of Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Federated States of Micronesia">Federated States of Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="Netherlands Antilles">Netherlands Antilles</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestine">Palestine</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn">Pitcairn</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Romania">Romania</option><option value="Russian Federation">Russian Federation</option><option value="Rwanda">Rwanda</option><option value="R&eacute;union">Réunion</option><option value="St. Barth&eacute;lemy">St. Barthélemy</option><option value="St. Helena, Ascension and Tristan Da Cunha">St. Helena, Ascension and Tristan Da Cunha</option><option value="St. Kitts And Nevis">St. Kitts And Nevis</option><option value="St. Lucia">St. Lucia</option><option value="St. Martin">St. Martin</option><option value="St. Pierre And Miquelon">St. Pierre And Miquelon</option><option value="St. Vincent And The Grenedines">St. Vincent And The Grenedines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard And Jan Mayen">Svalbard And Jan Mayen</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syrian Arab Republic">Syrian Arab Republic</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option selected="selected" value="United States">United States</option><option value="US Minor Outlying Islands">US Minor Outlying Islands</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Venezuela">Venezuela</option><option value="Viet Nam">Viet Nam</option><option value="Virgin Islands, British">Virgin Islands, British</option><option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select></td>
+            </tr>
+        
+        
+    
+    <tr>
+        <td class="rightAlign">* Phone Number</td>
+        <td><input class="regula-validation checkout" data-constraints="@Required(label=&quot;Phone Number&quot;, groups=[customer])" id="phoneNumber" name="phoneNumber" size="25" type="text" /></td>
+    </tr>
+    <tr>
+        <td class="rightAlign">* Email Address</td>
+        <td><input class="regula-validation checkoutBottom" data-constraints="@Required(label=&quot;Email Address&quot;, groups=[customer]) @Email(label=&quot;Email Address&quot;, groups=[customer])" id="emailAddress" name="emailAddress" size="15" type="text" /></td>
+    </tr>
+    
+        
+        
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+        
+    
+</table>
+
+<script type="text/javascript">Infusion.on("ManageCart").readyExec(function() {
+            
+
+    var $country = jQuery('#country');
+
+        if ($country.val() == 'United States' || $country.val() == 'Canada') {
+            jQuery('#stateRequired').html('* State');
+        }
+
+    if ($country.length > 0 && "SELECT" == $country.get(0).tagName) {
+
+
+        $country.change(function() {
+
+            if ($country.val() == 'United States' || $country.val() == 'Canada') {
+                jQuery('#stateRequired').html('* State');
+            } else {
+                jQuery('#stateRequired').html('State');
+            }
+        });
+
+    }
+
+    var formName = 'checkout';
+    jQuery('#firstName').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    jQuery('#lastName').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    jQuery('#addressLine1').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    jQuery('#city').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    jQuery('#state').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    jQuery('#zipCode').bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+    $country.bind('change', {formName: formName}, Infusion.ManageCart.taxAjaxCall);
+
+
+        ;});</script>
+
+    </div>
+
+    
+
+    <div id="SHIPPING_ENTRY">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+
+    <div id="PAYMENT_SELECTION">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="paymentMethodTable">
+    <tbody>
+        
+            <tr>
+                <th colspan="5" class="leftAlign">Payment Information</th>
+            </tr>
+        
+
+        
+
+        <tr>
+            
+                <td>
+                    
+                        
+                        
+                            <input id="creditCardType" name="paymentType" type="hidden" value="creditcard" />
+                        
+                    
+                    <label for="creditCardType">
+                        <img src="/resources/styledcart/images/paymenttypes/creditcard.png" class="paymentIcon" />
+                        <span class="smallHeader">Credit card</span>
+                    </label>
+                </td>
+            
+            
+            
+        </tr>
+
+        
+            <tr>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- creditCardForm v2 -->
+<tr class="cellLow">
+    <td class="pay1">
+        <span class="paymentLabel">Credit Card Type</span>
+        <select class="checkout" class="inf-select is-component" id="cardType" name="cardType" size="1" data-on="Component.Select"><option value="American Express">American Express</option><option value="Discover">Discover</option><option value="MasterCard">MasterCard</option><option value="Visa">Visa</option></select>
+    </td>
+    <td class="pay2">
+        <span class="paymentLabel">Credit Card Number</span>
+        
+            
+            
+                <input class="regula-validation checkout" data-constraints="@Required(label=&quot;Credit Card Number&quot;, groups=[creditCard])" id="cardNumber" name="cardNumber" type="text" maxlength="16" autocomplete="off" />&nbsp;&nbsp;
+            
+        
+    </td>
+    <td class="pay3">
+        <span class="paymentLabel">Expiration Date</span>
+        <select class="checkoutShortest" class="inf-select is-component" id="expirationMonth" name="expirationMonth" size="1" data-on="Component.Select"><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+        <select class="checkoutShortest" class="inf-select is-component" id="expirationYear" name="expirationYear" size="1" data-on="Component.Select"><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option></select>
+    </td>
+    <td class="pay4">
+        
+    </td>
+</tr>
+
+
+            </tr>
+
+            
+
+            
+
+        
+
+        <script type="text/javascript">Infusion.on("ManageCart").readyExec(function() {
+            
+
+            if (jQuery('#cardType').val() !== "Maestro") {
+                maestroNotSelected();
+            }
+
+            jQuery('#creditCardType').bind("click", function() {
+                // in general, slide effect doesn't work on <tr>
+                jQuery('tr.cellLow').show();
+                if (jQuery('#cardType').val() !== "Maestro") {
+                    maestroNotSelected();
+                }
+            });
+
+            jQuery('#payPalType').bind("click", function() {
+                if (false) {
+                    alert("Please note that your shipping address will be overwritten with the address you choose using PayPal.");
+                }
+                jQuery('tr.cellLow').hide();
+            });
+
+            jQuery('#paybycheck').live("click", function() {
+               jQuery('tr.cellLow').hide();
+            });
+
+            jQuery('#cardType').live('change', function() {
+                if (jQuery('#cardType').val() !== "Maestro") {
+                    maestroNotSelected();
+                } else {
+                    maestroSelected();
+                }
+            });
+
+            function maestroSelected() {
+                jQuery('tr.maestro').show();
+            }
+
+            function maestroNotSelected() {
+                jQuery('tr.maestro').hide();
+            }
+        
+        ;});</script>
+
+    </tbody>
+</table>
+    </div>
+
+    
+
+    <div id="CUSTOM_HTML">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="customCheckoutBottom">
+    
+</div>
+    </div>
+
+                        </div>
+                    
+
+                    
+                    
+
+                    <div class="checkoutLinks">
+                        
+                            <a href="/app/storeFront/showStoreFront" class="continueButton">Continue Shopping</a>
+                        
+                        <a href="javascript:void(0)" id="checkoutButton" class="continueButton">Checkout</a>
+                    </div>
+
+                    
+                    
+                        <div id="footer">
+                            
+                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    <div id="CUSTOM_HTML">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="customFooter">
+    <b>Custom Footer</b>
+</div>
+    </div>
+
+                        </div>
+                    
+                    
+                </form>
+            </div>
+        
+    </body>
+
+    
+        
+            <script type="text/javascript">jQuery(window).load(function() {
+
+                    regula.custom({
+                        name: "StateRequiredForSpecificCountries",
+                        defaultMessage: '{label} is required.',
+                        params: ["countryFieldName"],
+                        validator: function(params) {
+
+                            var validated = true;
+                            var $countryField = jQuery('#' + params["countryFieldName"]);
+                            if ($countryField.val() == 'United States' || $countryField.val() == 'Canada') {
+                                if (jQuery(this).val() == '') {
+                                    validated = false;
+                                }
+                            }
+
+                            return validated;
+                        }
+                    });
+
+                    regula.bind();
+
+                    jQuery("#checkout").submit(function() {
+
+                        regula.unbind();
+                        regula.bind();
+
+                        if (jQuery('#proceedToCheckout').val() == 'true') {
+
+                            // this function performs the actual validation
+                            var validationResults = null;
+
+                            if (jQuery('#creditCardType').length > 0 && jQuery('#creditCardType').is(':checked')) {
+                                validationResults = regula.validate({groups: [regula.Group.customer, regula.Group.creditCard]});
+                            } else {
+                                validationResults = regula.validate({groups: [regula.Group.customer]});
+                            }
+
+                            log.on();
+                            log.debug(validationResults);
+
+                            var allValidationResults  = "";
+
+                            for(var i = 0; i < validationResults.length; i++) {
+                                 var validationResult = validationResults[i];
+                                 allValidationResults += validationResult.message + '\n';
+                            }
+
+                            if (allValidationResults.length > 0) {
+                                alert(allValidationResults);
+                            }
+
+                            return validationResults.length == 0;
+                        }
+
+                        return true;
+                    });
+
+                    
+                    jQuery('#updateQuantity').click(function() {
+                        Infusion.ManageCart.submitForm('checkout', false, 0, 0);
+                    });
+
+                    jQuery('#checkoutButton, #checkoutButtonDup').click(function() {
+                        Infusion.ManageCart.validateAndSubmitForm(jQuery('#isCartEmpty').val(), jQuery('#isShippingRequired').val(), 'checkout', true, 0, 0);
+                    });
+
+                //tooltip
+                Infusion.Ecomm.OrderForms.bindTooltip('tooltip');
+               });</script>
+        
+
+        
+
+    
+
+    <script type="text/javascript" src="https://dd107.infusionsoft.com/app/webTracking/getTrackingCode?trackingId=9cfec996d8e13ec3d88eb59aaa67575e"></script>
+
+</html>

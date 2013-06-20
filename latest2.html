@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+<style>
+h1 {
+display: inline-block;
+margin-right: 20px;
+width: 300px;
+}
+
+#dark{
+	background-color:#333;
+	border:1px solid #000;
+	padding:10px;
+	margin-top:20px;}
+	
+#light{
+	background-color:#FFF;
+	border:1px solid #dedede;
+	padding:10px;
+	margin-top:20px;}	
+	
+li{ 
+list-style:none;
+	padding-top:10px;
+	padding-bottom:10px;}	
+
+.button, .button:visited {
+	/*background: #222 url(overlay.png) repeat-x; */
+	display: inline-block; 
+	padding: 5px 10px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	-moz-border-radius: 6px; 
+	-webkit-border-radius: 6px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer
+}
+ 
+	.button:hover							{ background-color: #111; color: #fff; }
+	.button:active							{ top: 1px; }
+	.small.button, .small.button:visited 			{ font-size: 11px}
+	.button, .button:visited,
+	.medium.button, .medium.button:visited 		{ font-size: 13px; 
+												  font-weight: bold; 
+												  line-height: 1; 
+												  text-shadow: 0 -1px 1px rgba(0,0,0,0.25); 
+												  }
+												  
+	.large.button, .large.button:visited 			{ font-size: 14px; 
+													  padding: 8px 14px 9px; }
+													  
+	.super.button, .super.button:visited 			{ font-size: 34px; 
+													  padding: 8px 14px 9px; }
+	
+	.pink.button, .magenta.button:visited		{ background-color: #e22092; }
+	.pink.button:hover							{ background-color: #c81e82; }
+	.green.button, .green.button:visited		{ background-color: #91bd09; }
+	.green.button:hover						    { background-color: #749a02; }
+	.red.button, .red.button:visited			{ background-color: #e62727; }
+	.red.button:hover							{ background-color: #cf2525; }
+	.orange.button, .orange.button:visited		{ background-color: #ff5c00; }
+	.orange.button:hover						{ background-color: #d45500; }
+	.blue.button, .blue.button:visited		    { background-color: #2981e4; }
+	.blue.button:hover							{ background-color: #2575cf; }
+	.yellow.button, .yellow.button:visited		{ background-color: #ffb515; }
+	.yellow.button:hover						{ background-color: #fc9200; }
+
+</style>
+
+<script type="text/javascript">
+/* Mikey Beck's  Javascript time recorder using HTML5 storage.   Say hi at mikeybeck.com.
+
+Version 0.9.3 - Fixed refresh bug.  *TOFIX* reset button bug - first few pushes of start button arent displaying things properly
+Version 0.9.2 - Added 'total time' output.  *TOFIX* refresh bug - done.
+Version 0.9 - ordered the output (finally!) and reversed it so latest is at the top.  *TODO* make this optional so user can choose which way it's ordered.
+Version 0.8.1 - Made nice looking start/stop button
+Version 0.8 - working draft
+
+
+*/
+
+var c=parseInt(localStorage.c);
+var a;
+var t;
+var timer_is_on=0;
+
+var started = true;
+
+
+// Add leading-zeros to numbers less than 10[000...]
+function padZ(num, n) {
+    n = n || 1; // Default assume 10^1
+    return num < Math.pow(10, n) ? "0" + num : num;
+}
+
+function getDate() {
+	var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1; // Note the `+ 1` -- months start at zero.
+    var year = d.getFullYear();
+    var hour = d.getHours();
+    var min = d.getMinutes();
+    var sec = d.getSeconds();
+    return day+"/"+month+"/"+year+" "+hour+":"+padZ(min)+":"+padZ(sec);
+}
+
+
+
+function clearAll() {
+	localStorage.clear();
+	localStorage.notfirsttime = "false";
+	started = false;
+	startstop();
+	alert("cleared!");
+	
+	//location.reload(true);
+}
+
+function stop() {
+	clearTimeout(t);
+	if (timer_is_on) {
+		timer_is_on=0;
+		//date = new Date();
+		date = getDate();
+		activity = getActivity(1);
+		
+		var d = new Date();
+		var time = d.getTime();
+		var elapsed_time = time - localStorage.time;
+		/* algorithm to get h/m/s from ms
+		x = ms / 1000
+		seconds = x % 60
+		x /= 60
+		minutes = x % 60
+		x /= 60
+		hours = x % 24
+		x /= 24
+		days = x
+		*/
+		var ms = elapsed_time;
+		var x = ms/1000; //x becomes a few things, hence the stupid variable name
+		x = Math.floor(x);
+		var seconds = x % 60;
+		x = x / 60;
+		x = Math.floor(x);
+		var minutes = x % 60;
+		x = x / 60;
+		x = Math.floor(x);
+		var hours = x % 24;
+		x = x / 24;
+		x = Math.floor(x);
+		var days = x;
+		
+		elapsed_time = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+		
+		localStorage.setItem(activity, localStorage.getItem(activity) + " Stopped: " + date + " Time taken: " + elapsed_time + "</div>");
+	}
+}
+
+function counter() {
+	//if (!c in window) {
+	if (isNaN(c)) {
+		c = 0;
+	}
+	document.getElementById('count').value=c;
+	t=setTimeout("counter()",1000);
+	//localStorage.setItem(getActivityName(), c);
+	localStorage.c = c;
+	c=c+1;
+}
+
+function timer() {
+if (!timer_is_on) {
+	timer_is_on=1;
+	counter();
+  }
+}
+
+function getActivityName() {
+	return document.getElementById('activity').value;
+}
+
+function getID(x) {
+	var i=parseInt(localStorage.i);
+	if (isNaN(i)) {
+		i = 0;
+	}
+	if (x != 1) {
+		i+=1;
+	}
+	localStorage.i = i;
+	return i;
+}
+
+function getActivity(x) {
+	return '<div class="entry">'+'<h1 class="ID_Activity">'+getID(x) + ":" + getActivityName()+"</h1>"; //this appends a number to the activity name and therefore prevents overwriting
+}
+
+function start(x) { //if x is 1, the page has been refreshed or something AND the timer has started, so carry on and don't reset anything
+
+	var d = new Date();
+    var time = d.getTime();
+	
+	if (x != 1) { // x is not 1, therefore the timer is stopped, so carry on and feel free to reset things etc
+		localStorage.time = time;
+		var activity;
+		activity = getActivity(0);
+		date = getDate();
+		localStorage.setItem(activity, 'Started: ' + date);
+	} else {
+		replaceButtonText('startstopbutton', 'stop'); //make sure the button says stop, as the timer is currently going
+	}
+	timer();
+}
+
+function display() {
+	var data = [];
+	var num = [];
+	var str = [];
+	var numHours = [];
+	var numMinutes = [];
+	var numSeconds = [];
+	
+	for (var i = 0; i < localStorage.length-8; i++){ //length-8 in order to not display the extra stuff (i & j values etc)
+		if (document.getElementById(i) == null) {
+			if (i == 0) {
+				localStorage.j = -1;
+			}
+			creatediv();
+		}
+		//document.getElementById(i).innerHTML=(localStorage.key(i) + localStorage.getItem(localStorage.key(i)));
+		//data.push(localStorage.key(i) + localStorage.getItem(localStorage.key(i)));
+		
+		// get entry number
+		num[i] = localStorage.key(i).replace(/<div class="entry"><h1 class="ID_Activity">/g,'');
+		num[i] = num[i].replace(/:<\/h1>/g,'');
+		num[i] = parseInt(num[i]);
+		
+		// get data
+		data[i] = (localStorage.key(i) + localStorage.getItem(localStorage.key(i)));
+		//console.log(data);
+		
+		//"<div class="entry"><h1 class="ID_Activity">9:</h1>Started: 19/3/2013 16:32:07 Stopped: 19/3/2013 16:32:07 Time taken: 0 hours, 0 minutes, 0 seconds</div>"
+		// get elapsed time  /<a[^>]*>(.*?)<\/a>/
+		numHours[i] = data[i].match(/ Time taken: (.*?) hours, /);
+		numMinutes[i] = data[i].match(/ hours, (.*?) minutes, /);
+		numSeconds[i] = data[i].match(/ minutes, (.*?) seconds</);
+		//elapsedTime[i] = data[i].replace(/ Time taken: /g,'');
+		//console.log(numHours, numMinutes, numSeconds);
+		//console.log(numSeconds[i]);
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+// just close your eyes and pretend this next bit of code doesnt exist.  Unless you need to optimise things, in which case I suggest you rewrite this whole function.
+// this bit re-sorts the data into numerical order upwards so the latest entry is at the top
+		var A = num;
+		var B = data;
+
+
+var all = [];
+
+for (var p = 0; p < B.length; p++) {
+    all.push({ 'A': A[p], 'B': B[p] });
+}
+
+all.sort(function(a, b) {
+  return a.A - b.A;
+});
+
+A = [];
+B = [];
+
+for (var q = 0; q < all.length; q++) {
+   A.push(all[q].A);
+   B.push(all[q].B);
+}    
+		
+		
+//		alert(B.join('\n'));
+//console.log(A, B);
+
+var totalSeconds = 0;
+var totalMinutes = 0;
+var totalHours = 0;
+B.reverse(); //order data so newest is at the top
+for (var z = 0; z < B.length; z++) {
+document.getElementById(z).innerHTML=(B[z]); //display data
+}
+// ok, you can open your eyes again now
+
+var tt;
+
+for (var d = 0; d < numHours.length; d++) {
+	if (localStorage.started == "true") {
+		//console.log(numHours);
+		totalHours += parseInt(numHours[d][1]);
+		totalMinutes += parseInt(numMinutes[d][1]);
+		totalSeconds += parseInt(numSeconds[d][1]);
+//} else {
+//totalHours += parseInt(numHours[d+1][1]);
+//totalMinutes += parseInt(numMinutes[d+1][1]);
+//totalSeconds += parseInt(numSeconds[d+1][1]);
+	tt = 'Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.';
+	localStorage.totalTime = tt;
+	document.getElementById('totalTime').innerHTML=(tt);
+	//document.getElementById('totalTime').innerHTML=('Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.');
+	}
+}
+
+
+console.log(totalSeconds);
+console.log(totalMinutes);
+console.log(totalHours);
+
+//document.getElementById('totalTime').innerHTML=('Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.');
+//document.getElementById(tt);
+
+}
+
+
+
+
+
+
+function replaceButtonText(buttonId, text)
+{
+  if (document.getElementById)
+  {
+    var button=document.getElementById(buttonId);
+    if (button)
+    {
+      if (button.childNodes[0])
+      {
+        button.childNodes[0].nodeValue=text;
+      }
+      else if (button.value)
+      {
+        button.value=text;
+      }
+      else //if (button.innerHTML)
+      {
+        button.innerHTML=text;
+      }
+    }
+  }
+}
+
+function startstop() {
+	var text_box = document.getElementById('activity');
+	localStorage.text_box = text_box.value;
+	if( localStorage.started == "true" ){
+        text_box.setAttribute('readonly', 'readonly');   
+  		replaceButtonText('startstopbutton', 'stop');
+		started = false;
+		localStorage.started = started;
+		start();
+		creatediv();
+		display();
+  }else{
+	text_box.removeAttribute('readonly');
+	replaceButtonText('startstopbutton', 'start');
+	started = true;
+	localStorage.started = started;
+	stop();
+	display();
+  }
+}
+
+function creatediv() {
+	var j=parseInt(localStorage.j);
+	var notfirsttime = localStorage.notfirsttime;
+	if (notfirsttime != "true") {
+		j = -1;
+		localStorage.notfirsttime = "true";
+	}
+	
+	if (isNaN(j)) {
+		j = -1;
+	}
+	j+=1;
+	localStorage.j = j;
+	
+	
+    var newdiv = document.createElement('div');
+	newdiv.id = j;
+    document.body.appendChild(newdiv);
+}
+
+window.onload = function () {
+// Whatever you put in here will be executed on page load..
+	display();
+	if (localStorage.started == "false") { //dont ask why this is false rather than true.  I'm not really sure. Perhaps i have the values round the wrong way
+		var text_box = document.getElementById('activity');
+		text_box.value=localStorage.text_box;
+		text_box.setAttribute('readonly', 'readonly');
+		document.getElementById('totalTime').innerHTML=(localStorage.totalTime);
+		start(1);
+	}
+};
+
+</script>
+</head>
+<body>
+<form>
+
+<a onclick="startstop()" id="startstopbutton" class="super pink button">start</a>
+
+<input type="button" value="Display!" onclick="display()" />
+<input type="text" id="count" />
+<input type="button" value="reset!" onclick="clearAll()" />
+
+<input type="text" id="activity" />
+<br />
+&nbsp;
+<div id="totalTime"></div>
+
+</form>
+
+
+</body>
+</html>

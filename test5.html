@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title></title>
+<script type="text/javascript">
+/*<![CDATA[*/
+window.onload=function(){document.getElementById('activity1').value = localStorage.activity1};
+
+
+function zxcStartTime(id,srt){
+ var obj=document.getElementById(id),ms=obj.value.split(/\W/);
+ if (zxcStartTime[id]){
+  clearTimeout(zxcStartTime[id].to);
+ }
+ if (srt&&isFinite(ms[0])&&isFinite(ms[1])){
+  zxcStartTime[id]={
+   obj:obj,
+   srt:new Date(),
+   time:ms[0]*60+ms[1]*1
+  }
+  zxcTick(zxcStartTime[id]);
+ }
+}
+
+function zxcTick(o){
+ var now=Math.floor(o.time+(new Date()-o.srt)/1000);
+ if (now>=0){
+  o.obj.value=zxcNu(Math.floor(now/60))+':'+zxcNu(now%60);
+  o.to=setTimeout(function(){ zxcTick(o); },1000)
+ }
+}
+
+function zxcNu(nu){
+ return (nu>9?'':'0')+nu;
+}
+
+function save() {
+	localStorage.activity1 = document.getElementById('activity1').value;
+	alert(localStorage.activity1);
+}
+/*]]>*/
+</script></head>
+
+<body>
+<label>Activity:</label><input type="text" id="activity1" />
+<input id="time1" value="00:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time1',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time1',false);" />
+<br />
+<label>Activity:</label><input type="text" id="activity2" />
+<input id="time2" value="00:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time2',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time2',false);" />
+<br />
+<label>Activity:</label><input type="text" id="activity3" />
+<input id="time3" value="00:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time3',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time3',false);" />
+<br />
+<label>Activity:</label><input type="text" id="activity4" />
+<input id="time4" value="00:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time4',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time4',false);" />
+<br />
+<input type="button" value="Save!" onclick="save()" />
+</body>
+
+</html>
+
+<body>
+
+<input type="button" value="Reset count!" onclick="resetCount()" />
+</form>
+<p>
+Click on the "Start count!" button above to start the timer. The input field will count forever, starting at 0. Click on the "Stop count!" button to stop the counting. Click on the "Start count!" button to start the timer again.
+</p>
+<div id="c"></div>
+</body>
+</html>
+

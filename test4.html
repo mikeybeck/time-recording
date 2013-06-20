@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html>
+<head>
+<script type="text/javascript">
+var c=parseInt(localStorage.c);
+var t;
+var timer_is_on=0;
+ 
+function timedCount(activity)
+{
+//alert(document.getElementById(activity) + " " + c);
+document.getElementById(activity).value=c;
+t=setTimeout("timedCount()",1000);
+localStorage.c = c;
+localStorage.setItem(activity, c);
+c=c+1;
+}
+ 
+function doTimer(activity)
+{
+var activityX = document.getElementById(activity).value;
+localStorage.cx = activityX;
+if (!timer_is_on)
+  {
+  timer_is_on=1;
+  timedCount(activity);
+  }
+}
+ 
+function stopCount()
+{
+clearTimeout(t);
+timer_is_on=0;
+}
+
+function getCount(activity)
+{
+var activity = document.getElementById('activity').value;
+//alert(activity + " " + localStorage.getItem(activity))
+
+document.getElementById("c").innerHTML="time: " + localStorage.c;
+}
+function resetCount()
+{
+c = 0;
+localStorage.c = 0;
+}
+</script>
+</head>
+<body>
+<form>
+<label>Activity 1:</label> <input type="text" id="activity1" />
+<input type="button" value="Start!" onclick="doTimer('txt1')" />
+<input type="text" id="txt1" />
+<input type="button" value="Stop!" onclick="stopCount()" />
+<br />
+<label>Activity 2:</label> <input type="text" id="activity2" />
+<input type="button" value="Start!" onclick="doTimer('txt2')" />
+<input type="text" id="txt2" />
+<input type="button" value="Stop!" onclick="stopCount()" />
+<br />
+
+
+
+<input type="button" value="Get count!" onclick="getCount(a)" />
+<input type="button" value="Reset count!" onclick="resetCount()" />
+</form>
+<p>
+Click on the "Start count!" button above to start the timer. The input field will count forever, starting at 0. Click on the "Stop count!" button to stop the counting. Click on the "Start count!" button to start the timer again.
+</p>
+<div id="c"></div>
+</body>
+</html>

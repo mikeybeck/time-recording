@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title></title>
+<script type="text/javascript">
+/*<![CDATA[*/
+function zxcStartTime(id,srt){
+ var obj=document.getElementById(id),ms=obj.value.split(/\W/);
+ if (zxcStartTime[id]){
+  clearTimeout(zxcStartTime[id].to);
+ }
+ if (srt&&isFinite(ms[0])&&isFinite(ms[1])){
+  zxcStartTime[id]={
+   obj:obj,
+   srt:new Date(),
+   time:ms[0]*60+ms[1]*1
+  }
+  zxcTick(zxcStartTime[id]);
+ }
+}
+
+function zxcTick(o){
+ var now=Math.floor(o.time-(new Date()-o.srt)/1000);
+ if (now>=0){
+  o.obj.value=zxcNu(Math.floor(now/60))+':'+zxcNu(now%60);
+  o.to=setTimeout(function(){ zxcTick(o); },1000)
+ }
+}
+
+function zxcNu(nu){
+ return (nu<9?'':'0')+nu;
+}
+
+/*]]>*/
+</script></head>
+
+<body>
+<input id="time" value="1:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time',false);" />
+<br />
+<input id="time2" value="1:00" /><input type="button" name="" value="Start" onmouseup="zxcStartTime('time2',true);" /><input type="button" name="" value="Stop" onmouseup="zxcStartTime('time2',false);" />
+</body>
+
+</html>
+
+<html>
+<head>
+<script type="text/javascript">
+var c=parseInt(localStorage.c);
+var t;
+var timer_is_on=0;
+ 
+function timedCount(activity)
+//function timedCount()
+{
+document.getElementById('txt').value=c;
+t=setTimeout("timedCount()",1000);
+localStorage.c = c;
+localStorage.setItem(activity, c);
+c=c+1;
+}
+ 
+function doTimer()
+{
+var activity = document.getElementById('activity').value;
+localStorage.cx = activity;
+if (!timer_is_on)
+  {
+  timer_is_on=1;
+  timedCount(activity);
+//timedCount();
+  }
+}
+ 
+function stopCount()
+{
+clearTimeout(t);
+timer_is_on=0;
+}
+
+function getCount()
+{
+var activity = document.getElementById('activity').value;
+alert(activity + " " + localStorage.getItem(activity))
+
+document.getElementById("c").innerHTML="time: " + localStorage.c;
+}
+function resetCount()
+{
+c = 0;
+localStorage.c = 0;
+}
+</script>
+</head>
+<body>
+<form>
+<input type="button" value="Start count!" onclick="doTimer()" />
+<input type="text" id="txt" />
+<br />
+<input type="text" id="activity" />
+<input type="button" value="Stop count!" onclick="stopCount()" />
+<input type="button" value="Get count!" onclick="getCount()" />
+<input type="button" value="Reset count!" onclick="resetCount()" />
+</form>
+<p>
+Click on the "Start count!" button above to start the timer. The input field will count forever, starting at 0. Click on the "Stop count!" button to stop the counting. Click on the "Start count!" button to start the timer again.
+</p>
+<div id="c"></div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="result"></div>
+<script>
+if(typeof(Storage)!=="undefined")
+  {
+  //localStorage.lastname="Smith";
+  document.getElementById("result").innerHTML="Last name: " + localStorage.lastname;
+  }
+else
+  {
+  document.getElementById("result").innerHTML="Sorry, your browser does not support web storage...";
+  }
+</script>
+
+</body>
+</html>
