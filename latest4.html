@@ -339,6 +339,35 @@ for (var d = 0; d < numHours.length-1; d++) {
 	localStorage.totalTime = tt;
 	document.getElementById('totalTime').innerHTML=(tt);
 	//document.getElementById('totalTime').innerHTML=('Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.');
+	
+	
+	
+		var ms = totalHours*60*60*1000+totalMinutes*60*1000+totalSeconds*1000;
+		var x = ms/1000; //x becomes a few things, hence the stupid variable name
+		x = Math.floor(x);
+		var seconds = x % 60;
+		x = x / 60;
+		x = Math.floor(x);
+		var minutes = x % 60;
+		x = x / 60;
+		x = Math.floor(x);
+		var hours = x % 24;
+		x = x / 24;
+		x = Math.floor(x);
+		var days = x;
+		
+		//elapsed_time = hours + " hours, " + minutes + " minutes, " + seconds + " seconds";
+		//tt = 'Total Time: '+elapsed_time;
+		//localStorage.totalTime = tt;
+		//document.getElementById('totalTime').innerHTML=(tt);
+		
+		//localStorage.setItem(activity, localStorage.getItem(activity) + " Stopped: " + date + " Time taken: " + elapsed_time + "</div>");
+	
+	
+	
+	
+	
+	
 	}
 }
 
