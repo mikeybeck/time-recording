@@ -228,7 +228,7 @@ function display() {
 	var numMinutes = [];
 	var numSeconds = [];
 	
-	for (var i = 0; i < localStorage.length-8; i++){ //length-8 in order to not display the extra stuff (i & j values etc)
+	for (var i = 0; i < localStorage.length-7; i++){ //length-8 in order to not display the extra stuff (i & j values etc)
 		if (document.getElementById(i) == null) {
 			if (i == 0) {
 				localStorage.j = -1;
@@ -317,9 +317,17 @@ var tt;
 for (var d = 0; d < numHours.length; d++) {
 	if (localStorage.started == "true") {
 		//console.log(numHours);
-		totalHours += parseInt(numHours[d][1]);
+		try
+{
+ totalHours += parseInt(numHours[d][1]);
 		totalMinutes += parseInt(numMinutes[d][1]);
 		totalSeconds += parseInt(numSeconds[d][1]);
+}
+catch (e)
+{
+  alert("error:"+e);
+}
+		
 //} else {
 //totalHours += parseInt(numHours[d+1][1]);
 //totalMinutes += parseInt(numMinutes[d+1][1]);
@@ -407,7 +415,9 @@ function creatediv() {
 	
     var newdiv = document.createElement('div');
 	newdiv.id = j;
+	alert("appending "+j);
     document.body.appendChild(newdiv);
+	alert("appended "+j);
 }
 
 window.onload = function () {
