@@ -325,7 +325,7 @@ for (var d = 0; d < numHours.length; d++) {
 }
 catch (e)
 {
-  alert("error:"+e);
+  //alert("error:"+e);
 }
 		
 //} else {
@@ -379,9 +379,11 @@ function replaceButtonText(buttonId, text)
 
 function startstop() {
 	var text_box = document.getElementById('activity');
+	var reset_button = document.getElementById('resetbutton');
 	localStorage.text_box = text_box.value;
 	if( localStorage.started == "true" ){
         text_box.setAttribute('readonly', 'readonly');   
+		resetbutton.disabled = true;
   		replaceButtonText('startstopbutton', 'stop');
 		started = false;
 		localStorage.started = started;
@@ -390,6 +392,7 @@ function startstop() {
 		display();
   }else{
 	text_box.removeAttribute('readonly');
+	resetbutton.disabled = false;
 	replaceButtonText('startstopbutton', 'start');
 	started = true;
 	localStorage.started = started;
@@ -415,9 +418,9 @@ function creatediv() {
 	
     var newdiv = document.createElement('div');
 	newdiv.id = j;
-	alert("appending "+j);
+	//alert("appending "+j);
     document.body.appendChild(newdiv);
-	alert("appended "+j);
+	//alert("appended "+j);
 }
 
 window.onload = function () {
@@ -441,7 +444,7 @@ window.onload = function () {
 
 <input type="button" value="Display!" onclick="display()" />
 <input type="text" id="count" />
-<input type="button" value="reset!" onclick="clearAll()" />
+<input type="button" value="reset!" id="resetbutton" onclick="clearAll()" />
 
 <input type="text" id="activity" />
 <br />
