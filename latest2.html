@@ -288,12 +288,13 @@ var totalHours = 0;
 
 
 for (var z = 0; z < B.length; z++) {
-B[z] = num[z] + B[z];
+B[z] = num[z] + '*' + B[z];
 }
 
 B = mySort(B);
 B.reverse();
 for (var z = 0; z < B.length; z++) {
+B[z] = B[z].substring(B[z].indexOf("*") + 1);
 document.getElementById(z).innerHTML=(B[z]); //display data
 }
 
