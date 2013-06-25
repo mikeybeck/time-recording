@@ -256,8 +256,79 @@ function display() {
 		//console.log(numHours, numMinutes, numSeconds);
 		//console.log(numSeconds[i]);
 	}
+	sort2(num, data, numHours, numMinutes, numSeconds);
+}
+
+function mySort(arr)
+{
+	var regex = /([0-9]+)/;
+
+    function map(str) {
+        return Number(regex.exec(str)[1]);
+    }
+
+    return arr
+    .sort(
+        function (a,b) {
+            var av = map(a), bv = map(b);
+            return av < bv ? -1 : av > bv ? 1 : 0;
+        })
+}
+
+	
+function sort2(num, data, numHours, numMinutes, numSeconds) {
+	
+		
+		var A = num.pop();
+		var B = data;
+
+var totalSeconds = 0;
+var totalMinutes = 0;
+var totalHours = 0;
 
 
+for (var z = 0; z < B.length; z++) {
+B[z] = num[z] + B[z];
+}
+
+B = mySort(B);
+B.reverse();
+for (var z = 0; z < B.length; z++) {
+document.getElementById(z).innerHTML=(B[z]); //display data
+}
+
+var tt;
+
+for (var d = 0; d < numHours.length; d++) {
+	if (localStorage.started == "true") {
+		//console.log(numHours);
+		try
+{
+ totalHours += parseInt(numHours[d][1]);
+		totalMinutes += parseInt(numMinutes[d][1]);
+		totalSeconds += parseInt(numSeconds[d][1]);
+}
+catch (e)
+{
+  //alert("error:"+e);
+}
+		
+	tt = 'Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.';
+	localStorage.totalTime = tt;
+	document.getElementById('totalTime').innerHTML=(tt);
+	//document.getElementById('totalTime').innerHTML=('Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.');
+	}
+}
+
+
+console.log(totalSeconds);
+console.log(totalMinutes);
+console.log(totalHours);
+
+//document.getElementById('totalTime').innerHTML=('Total Time: '+totalHours+' hours, '+totalMinutes+' minutes, '+totalSeconds+' seconds.');
+//document.getElementById(tt);
+
+}
 	
 	
 	
@@ -271,8 +342,7 @@ function display() {
 	
 	
 	
-	
-	
+function sort(num, data, numHours, numMinutes, numSeconds) {
 	
 	
 // just close your eyes and pretend this next bit of code doesnt exist.  Unless you need to optimise things, in which case I suggest you rewrite this whole function.
